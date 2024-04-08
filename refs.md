@@ -1,0 +1,15 @@
+- TOTP
+  - https://en.wikipedia.org/wiki/Time-based_one-time_password
+  - https://totp.app/
+  - https://totp.danhersam.com/
+    - https://jkdos.com/totp/
+  - https://datatracker.ietf.org/doc/html/rfc6238
+- JavaScript
+  - https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign
+- Colors & Icons
+  - https://htmlcolorcodes.com/color-chart/
+  - https://fonts.google.com/icons?icon.query=add&icon.set=Material+Symbols&icon.style=Outlined
+    - https://developers.google.com/fonts/docs/material_symbols
+- CSS
+  - https://ishadeed.com/article/css-nesting/
+  - https://css-tricks.com/snippets/css/complete-guide-grid/
