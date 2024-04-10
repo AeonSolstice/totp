@@ -18,20 +18,45 @@ const viewGrid = $('#view-grid');
 
 let view = 'list';
 
-const items = ['GitHub', 'Google'];
+const secrets = [
+  {
+    label: 'GitHub',
+    encrypted: false,
+    originalKey: '',
+    key: '',
+    digits: 6,
+    period: 30,
+  },
+  {
+    label: 'Google',
+    encrypted: false,
+    originalKey: '',
+    key: '',
+    digits: 6,
+    period: 30,
+  },
+  {
+    label: 'Discord',
+    encrypted: false,
+    originalKey: '',
+    key: '',
+    digits: 6,
+    period: 30,
+  },
+];
 
 function toggleView(kind) {
   if (view === kind) return;
 
   if (kind === 'list') {
-    btnList.classList.add('active', 'nohover');
-    btnGrid.classList.remove('active', 'nohover');
+    btnList.classList.add('selected');
+    btnGrid.classList.remove('selected');
 
     show(viewList);
     hide(viewGrid);
   } else {
-    btnGrid.classList.add('active', 'nohover');
-    btnList.classList.remove('active', 'nohover');
+    btnGrid.classList.add('selected');
+    btnList.classList.remove('selected');
 
     show(viewGrid);
     hide(viewList);
@@ -46,15 +71,41 @@ function build() {
   if (view === 'list') {
     viewListItems.innerHTML = '';
 
-    for (const i of items) {
-      const div = document.createElement('div');
+    for (const s of secrets) {
+      const item = document.createElement('div');
+      const label = document.createElement('p');
+      const actions = document.createElement('div');
+      const editAction = document.createElement('button');
 
-      div.innerText = i;
+      label.className = 'label';
+      label.innerText = s.label;
 
-      viewListItems.appendChild(div);
+      actions.className = 'actions';
+
+      editAction.dataset.tooltip = 'Edit';
+      editAction.appendChild(createIcon('edit'));
+
+      actions.append(createSep(), editAction);
+
+      item.append(label, actions);
+      viewListItems.appendChild(item);
     }
   } else {
   }
+}
+
+function createIcon(name) {
+  const s = document.createElement('span');
+  s.className = 'material-symbols-outlined';
+  s.innerText = name;
+  return s;
+}
+
+function createSep(right) {
+  const s = document.createElement('span');
+  s.className = 'sep';
+  if (right) s.classList.add('right');
+  return s;
 }
 
 on(btnList, 'click', () => {
@@ -65,18 +116,6 @@ on(btnGrid, 'click', () => {
   toggleView('grid');
 });
 
+on('#add-key', 'click', () => {});
+
 build();
-
-new MutationObserver((mutations) => {
-  for (const m of mutations) {
-    for (const e of m.addedNodes) {
-      console.log(e);
-    }
-
-    console.log(m.target);
-  }
-}).observe(document.body, {
-  subtree: true,
-  childList: true,
-  attributeFilter: ['data-tooltip'],
-});
