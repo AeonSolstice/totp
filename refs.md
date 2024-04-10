@@ -6,8 +6,11 @@
   - https://datatracker.ietf.org/doc/html/rfc6238
 - JavaScript
   - https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign
+  - https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+    - Currently not being used
 - Colors & Icons
   - https://htmlcolorcodes.com/color-chart/
+    - Material Design chart
   - https://fonts.google.com/icons?icon.query=add&icon.set=Material+Symbols&icon.style=Outlined
     - https://developers.google.com/fonts/docs/material_symbols
 - CSS
