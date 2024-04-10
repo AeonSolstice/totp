@@ -2,12 +2,69 @@
 
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>TOTP</title>
 
     <link rel="stylesheet" href="style.css" />
+
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    /> -->
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
+    />
   </head>
 
   <body>
+    <div id="toolbar">
+      <button id="add-key" data-tooltip="Add Key">
+        <span class="material-symbols-outlined">add</span>
+      </button>
+
+      <button class="right" data-tooltip="Settings">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+
+      <span class="sep right"></span>
+
+      <button class="right" data-tooltip="Import Data">
+        <span class="material-symbols-outlined">upload</span>
+      </button>
+
+      <button class="right" data-tooltip="Export Data">
+        <span class="material-symbols-outlined">download</span>
+      </button>
+
+      <span class="sep right"></span>
+
+      <button id="btn-list" class="right selected" data-tooltip="List View">
+        <span class="material-symbols-outlined">view_list</span>
+      </button>
+
+      <button
+        id="btn-grid"
+        class="right"
+        data-tooltip="(Coming Soon) Grid View"
+        disabled
+      >
+        <span class="material-symbols-outlined">grid_view</span>
+      </button>
+    </div>
+
+    <div id="content">
+      <div id="view-list">
+        <div class="header"></div>
+
+        <div class="items"></div>
+      </div>
+
+      <div id="view-grid" class="grid"></div>
+    </div>
+
     <script type="module" src="app.js"></script>
   </body>
 </html>
