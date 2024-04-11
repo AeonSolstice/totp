@@ -25,17 +25,17 @@
         <span class="material-symbols-outlined">add</span>
       </button>
 
-      <button class="right" data-tooltip="Settings">
+      <button class="right" data-tooltip="(Coming Soon) Settings" disabled>
         <span class="material-symbols-outlined">settings</span>
       </button>
 
       <span class="sep right"></span>
 
-      <button class="right" data-tooltip="Import Data">
+      <button class="right" data-tooltip="(Coming Soon) Import Data" disabled>
         <span class="material-symbols-outlined">upload</span>
       </button>
 
-      <button class="right" data-tooltip="Export Data">
+      <button class="right" data-tooltip="(Coming Soon) Export Data" disabled>
         <span class="material-symbols-outlined">download</span>
       </button>
 
@@ -64,6 +64,20 @@
 
       <div id="view-grid" class="grid"></div>
     </div>
+
+    <div id="add-key-modal" class="modal">
+      <div class="header">
+        <p>Add Key</p>
+
+        <button id="add-key-modal-close" data-tooltip="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="content"></div>
+    </div>
+
+    <div id="modal-bg"></div>
 
     <script type="module" src="app.js"></script>
   </body>

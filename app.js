@@ -16,6 +16,9 @@ const viewList = $('#view-list');
 const viewListItems = $('.items', viewList);
 const viewGrid = $('#view-grid');
 
+const modalBg = $('#modal-bg');
+const modalAddKey = $('#add-key-modal');
+
 let view = 'list';
 
 const secrets = [
@@ -76,6 +79,7 @@ function build() {
       const label = document.createElement('p');
       const actions = document.createElement('div');
       const editAction = document.createElement('button');
+      const copyAction = document.createElement('button');
 
       label.className = 'label';
       label.innerText = s.label;
@@ -85,7 +89,10 @@ function build() {
       editAction.dataset.tooltip = 'Edit';
       editAction.appendChild(createIcon('edit'));
 
-      actions.append(createSep(), editAction);
+      copyAction.dataset.tooltip = 'Copy Code';
+      copyAction.appendChild(createIcon('content_copy'));
+
+      actions.append(copyAction, createSep(), editAction);
 
       item.append(label, actions);
       viewListItems.appendChild(item);
@@ -116,6 +123,19 @@ on(btnGrid, 'click', () => {
   toggleView('grid');
 });
 
-on('#add-key', 'click', () => {});
+on('#add-key', 'click', () => {
+  show(modalBg);
+  show(modalAddKey);
+});
+
+on('#add-key-modal-close', 'click', () => {
+  hide(modalBg);
+  hide(modalAddKey);
+});
+
+on(modalBg, 'click', () => {
+  hide(modalBg);
+  hide(modalAddKey);
+});
 
 build();
