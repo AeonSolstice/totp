@@ -19,6 +19,9 @@ const viewGrid = $('#view-grid');
 const modalBg = $('#modal-bg');
 const modalAddKey = $('#add-key-modal');
 
+const inputLabel = $('#label-input');
+const inputKey = $('#key-input');
+
 let view = 'list';
 
 const secrets = [
@@ -126,6 +129,8 @@ on(btnGrid, 'click', () => {
 on('#add-key', 'click', () => {
   show(modalBg);
   show(modalAddKey);
+
+  inputLabel.focus();
 });
 
 on('#add-key-modal-close', 'click', () => {
