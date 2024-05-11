@@ -57,8 +57,19 @@ export const hotp = {
     buf.setUint32(0, Math.floor(counter / this.HALF));
     buf.setUint32(4, counter % this.HALF);
 
+    const secret = await window.crypto.subtle.importKey(
+      'raw',
+      key,
+      {
+        name: 'HMAC',
+        hash: 'SHA-1',
+      },
+      false,
+      ['sign'],
+    );
+
     const hmac = new Uint8Array(
-      await window.crypto.subtle.sign('HMAC', key, buf),
+      await window.crypto.subtle.sign('HMAC', secret, buf),
     );
 
     const o = hmac[hmac.length - 1] & 15;
