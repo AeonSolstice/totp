@@ -16,34 +16,15 @@ const viewList = $('#view-list');
 const viewListItems = $('.items', viewList);
 const viewGrid = $('#view-grid');
 
+const modalBg = $('#modal-bg');
+const modalAddSecret = $('#add-secret-modal');
+
+const inputLabel = $('#label-input');
+const inputSecret = $('#secret-input');
+
 let view = 'list';
 
-const secrets = [
-  {
-    label: 'GitHub',
-    encrypted: false,
-    originalKey: '',
-    key: '',
-    digits: 6,
-    period: 30,
-  },
-  {
-    label: 'Google',
-    encrypted: false,
-    originalKey: '',
-    key: '',
-    digits: 6,
-    period: 30,
-  },
-  {
-    label: 'Discord',
-    encrypted: false,
-    originalKey: '',
-    key: '',
-    digits: 6,
-    period: 30,
-  },
-];
+let secrets = JSON.parse(localStorage.getItem('secrets')) ?? [];
 
 function toggleView(kind) {
   if (view === kind) return;
@@ -76,16 +57,24 @@ function build() {
       const label = document.createElement('p');
       const actions = document.createElement('div');
       const editAction = document.createElement('button');
+      const copyAction = document.createElement('button');
 
       label.className = 'label';
       label.innerText = s.label;
 
       actions.className = 'actions';
 
-      editAction.dataset.tooltip = 'Edit';
+      editAction.disabled = true;
+      editAction.dataset.tooltip = 'Edit Secret';
       editAction.appendChild(createIcon('edit'));
 
-      actions.append(createSep(), editAction);
+      copyAction.dataset.tooltip = 'Copy Code';
+      copyAction.appendChild(createIcon('content_copy'));
+      on(copyAction, 'click', async () => {
+        await copyCode(s);
+      });
+
+      actions.append(copyAction, createSep(), editAction);
 
       item.append(label, actions);
       viewListItems.appendChild(item);
@@ -108,6 +97,17 @@ function createSep(right) {
   return s;
 }
 
+async function copyCode(s) {
+  const token = await totp.generate({
+    key: b32.decode(s.key),
+    digits: s.digits,
+    period: s.period,
+    ts: Date.now(),
+  });
+
+  await navigator.clipboard.writeText(token);
+}
+
 on(btnList, 'click', () => {
   toggleView('list');
 });
@@ -116,6 +116,57 @@ on(btnGrid, 'click', () => {
   toggleView('grid');
 });
 
-on('#add-key', 'click', () => {});
+on('#add-secret', 'click', () => {
+  show(modalBg);
+  show(modalAddSecret);
+
+  inputLabel.value = '';
+  inputSecret.value = '';
+
+  inputLabel.focus();
+});
+
+on('#add-key-modal-btn-close', 'click', () => {
+  hide(modalBg);
+  hide(modalAddSecret);
+});
+
+on(modalBg, 'click', () => {
+  hide(modalBg);
+  hide(modalAddSecret);
+});
+
+on('#add-key-modal-btn-add', 'click', () => {
+  hide(modalBg);
+  hide(modalAddSecret);
+
+  const label = inputLabel.value.trim();
+  const originalSecret = inputSecret.value;
+  const secret = originalSecret.replaceAll(/\s/g, '').toUpperCase();
+
+  inputLabel.value = '';
+  inputSecret.value = '';
+
+  if (
+    !label.length ||
+    !secret.length ||
+    secrets.find((s) => s.key === secret)
+  ) {
+    return;
+  }
+
+  secrets.push({
+    label,
+    key: secret,
+    digits: 6,
+    encrypted: false,
+    period: 30,
+    originalKey: originalSecret,
+  });
+
+  localStorage.setItem('secrets', JSON.stringify(secrets));
+
+  build();
+});
 
 build();

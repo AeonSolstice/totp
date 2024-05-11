@@ -21,21 +21,21 @@
 
   <body>
     <div id="toolbar">
-      <button id="add-key" data-tooltip="Add Key">
+      <button id="add-secret" data-tooltip="Add Secret">
         <span class="material-symbols-outlined">add</span>
       </button>
 
-      <button class="right" data-tooltip="Settings">
+      <button class="right" data-tooltip="(Coming Soon) Settings" disabled>
         <span class="material-symbols-outlined">settings</span>
       </button>
 
       <span class="sep right"></span>
 
-      <button class="right" data-tooltip="Import Data">
+      <button class="right" data-tooltip="(Coming Soon) Import Data" disabled>
         <span class="material-symbols-outlined">upload</span>
       </button>
 
-      <button class="right" data-tooltip="Export Data">
+      <button class="right" data-tooltip="(Coming Soon) Export Data" disabled>
         <span class="material-symbols-outlined">download</span>
       </button>
 
@@ -64,6 +64,40 @@
 
       <div id="view-grid" class="grid"></div>
     </div>
+
+    <div id="add-secret-modal" class="modal">
+      <div class="header">
+        <p class="title">Add Secret</p>
+
+        <button id="add-key-modal-btn-close" class="close" data-tooltip="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="content">
+        <div id="label-control" class="control">
+          <label for="label-input" data-tooltip="A label for the secret"
+            >Label</label
+          >
+
+          <input type="text" id="label-input" />
+        </div>
+
+        <div id="secret-control" class="control">
+          <label for="secret-input" data-tooltip="The secret itself"
+            >Secret</label
+          >
+
+          <input type="text" id="secret-input" />
+        </div>
+      </div>
+
+      <div class="footer">
+        <button id="add-key-modal-btn-add" data-tooltip="Add">Add</button>
+      </div>
+    </div>
+
+    <div id="modal-bg"></div>
 
     <script type="module" src="app.js"></script>
   </body>
