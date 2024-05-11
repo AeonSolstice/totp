@@ -21,7 +21,7 @@
 
   <body>
     <div id="toolbar">
-      <button id="add-key" data-tooltip="Add Key">
+      <button id="add-secret" data-tooltip="Add Secret">
         <span class="material-symbols-outlined">add</span>
       </button>
 
@@ -65,39 +65,35 @@
       <div id="view-grid" class="grid"></div>
     </div>
 
-    <div id="add-key-modal" class="modal">
+    <div id="add-secret-modal" class="modal">
       <div class="header">
-        <p>Add Key</p>
+        <p class="title">Add Secret</p>
 
-        <button id="add-key-modal-close" data-tooltip="Close">
+        <button id="add-key-modal-btn-close" class="close" data-tooltip="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
 
-      <div>
+      <div class="content">
         <div id="label-control" class="control">
-          <label for="label-input" data-tooltip="An identifier for the key"
+          <label for="label-input" data-tooltip="A label for the secret"
             >Label</label
           >
 
           <input type="text" id="label-input" />
         </div>
 
-        <div id="key-control" class="control">
-          <label for="key-input" data-tooltip="The key itself">Key</label>
-
-          <input type="text" id="key-input" />
-        </div>
-
-        <div id="key-format-control" class="control">
-          <label for="key-format-select" data-tooltip="The key format"
-            >Format</label
+        <div id="secret-control" class="control">
+          <label for="secret-input" data-tooltip="The secret itself"
+            >Secret</label
           >
 
-          <select id="key-format-select">
-            <option value="detect">Detect</option>
-          </select>
+          <input type="text" id="secret-input" />
         </div>
+      </div>
+
+      <div class="footer">
+        <button id="add-key-modal-btn-add" data-tooltip="Add">Add</button>
       </div>
     </div>
 

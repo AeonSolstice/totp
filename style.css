@@ -22,7 +22,8 @@ body {
   height: 100%;
 }
 
-button {
+button,
+select {
   --disabled-icon-color: #757575;
   --focus-border-color: white;
   --hover-background-color: #757575;
@@ -100,7 +101,7 @@ input[type='text'] {
   gap: var(--gap);
 }
 
-[data-tooltip] {
+/* [data-tooltip] {
   position: relative;
 
   &:after {
@@ -116,10 +117,14 @@ input[type='text'] {
     z-index: 1;
   }
 
+  &:focus:after {
+    transform: translate(-1px, 1px);
+  }
+
   &:hover:after {
     display: block;
   }
-}
+} */
 
 #toolbar {
   float: left;
@@ -141,7 +146,7 @@ input[type='text'] {
       line-height: var(--toolbar-height);
     }
 
-    &:focus > .material-symbols-outlined {
+    &:not(.selected):focus > .material-symbols-outlined {
       line-height: calc(var(--toolbar-height) - 2px);
     }
   }
@@ -181,6 +186,10 @@ input[type='text'] {
 
       &:nth-child(even) {
         background-color: #757575;
+
+        > .actions > button {
+          --disabled-icon-color: #616161;
+        }
       }
 
       /* item children */
@@ -193,6 +202,7 @@ input[type='text'] {
 
         &.label {
           height: 100%;
+          padding: 0 5px;
           line-height: var(--item-height);
         }
       }
@@ -230,24 +240,24 @@ input[type='text'] {
 .modal {
   --header-height: 30px;
   --content-padding: 10px;
+  --footer-height: 20px;
 
-  /* display: none; */
+  display: none;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(200px, 90%, 600px);
-  height: clamp(200px, 70%, 600px);
+  /* width: clamp(200px, 90%, 600px); */
+  /* height: clamp(200px, 70%, 600px); */
   z-index: 1;
 
   /* Header */
-  > div:first-child {
+  > .header {
     width: 100%;
     height: var(--header-height);
     background-color: #212121;
 
-    /* Title */
-    > p {
+    > .title {
       float: left;
       width: calc(100% - var(--header-height));
       height: 100%;
@@ -255,8 +265,7 @@ input[type='text'] {
       text-align: center;
     }
 
-    /* Close button */
-    > button {
+    > button.close {
       width: var(--header-height);
       height: 100%;
 
@@ -271,12 +280,17 @@ input[type='text'] {
     }
   }
 
-  /* Content */
-  > div:nth-child(2) {
+  > .content {
     width: 100%;
-    height: calc(100% - var(--header-height));
+    height: calc(100% - var(--header-height) - var(--footer-height));
     padding: var(--content-padding);
     background-color: #424242;
+  }
+
+  > .footer {
+    width: 100%;
+    height: var(--footer-height);
+    background-color: #212121;
   }
 }
 
@@ -306,14 +320,21 @@ input[type='text'] {
   }
 }
 
-#key-control,
-#label-control {
+#label-control,
+#secret-control {
   --label-height: 30px;
 
   width: 100%;
 }
 
-#key-input,
+#secret-input,
 #label-input {
   height: var(--label-height);
+  font-size: 16px;
+}
+
+#add-key-modal-btn-add {
+  width: 30px;
+  height: 100%;
+  float: right;
 }
