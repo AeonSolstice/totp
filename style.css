@@ -158,7 +158,7 @@ input[type='text'] {
   height: calc(100% - var(--toolbar-height));
   padding: var(--content-padding);
   background-color: #212121;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #view-list,
