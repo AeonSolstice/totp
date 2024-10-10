@@ -5,7 +5,13 @@
     - https://jkdos.com/totp/
   - https://datatracker.ietf.org/doc/html/rfc6238
 - JavaScript
-  - https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign
+  - https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto
+    - `sign()`
+    - `encrypt()`
+    - `decrypt()`
+    - `importKey()`
+    - `deriveKey()`
+  - https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
   - https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
     - Currently not being used
 - Colors & Icons
@@ -16,3 +22,5 @@
 - CSS
   - https://ishadeed.com/article/css-nesting/
   - https://css-tricks.com/snippets/css/complete-guide-grid/
+- git
+  - https://stackoverflow.com/a/2003515

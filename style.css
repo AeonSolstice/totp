@@ -25,14 +25,21 @@ body {
 button,
 select {
   --disabled-icon-color: #757575;
+  --background-color: transparent;
+  --border: none;
   --focus-border-color: white;
   --hover-background-color: #757575;
   --active-background-color: #616161;
   --selected-background-color: #212121;
 
   padding: 0;
-  border: none;
-  background-color: transparent;
+  border: var(--border);
+  border-radius: 0;
+  background-color: var(--background-color);
+
+  &:not([multiple]) > option {
+    background-color: var(--hover-background-color);
+  }
 
   &:disabled > .material-symbols-outlined {
     color: var(--disabled-icon-color);
@@ -49,17 +56,19 @@ select {
       border: 1px solid var(--focus-border-color);
     }
 
-    &:hover {
+    &:not([multiple]):hover {
       background-color: var(--hover-background-color);
     }
 
-    &:active {
+    &:not([multiple]):active {
       background-color: var(--active-background-color);
     }
   }
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='file']::file-selector-button,
+textarea {
   --border-color: #767676;
   --focus-border-color: white;
   --hover-background-color: #757575;
@@ -94,37 +103,20 @@ input[type='text'] {
   }
 }
 
+.hsep {
+  float: left;
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: white;
+}
+
 .grid {
   --gap: 10px;
 
   display: grid;
   gap: var(--gap);
 }
-
-/* [data-tooltip] {
-  position: relative;
-
-  &:after {
-    display: none;
-    position: absolute;
-    cursor: default;
-    padding: 5px;
-    border: 1px solid black;
-    background-color: #212121;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
-    content: attr(data-tooltip);
-    white-space: nowrap;
-    z-index: 1;
-  }
-
-  &:focus:after {
-    transform: translate(-1px, 1px);
-  }
-
-  &:hover:after {
-    display: block;
-  }
-} */
 
 #toolbar {
   float: left;
@@ -248,8 +240,8 @@ input[type='text'] {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* width: clamp(200px, 90%, 600px); */
-  /* height: clamp(200px, 70%, 600px); */
+  width: clamp(200px, 90%, 600px);
+  height: clamp(200px, 70%, 600px);
   z-index: 1;
 
   /* Header */
@@ -308,6 +300,7 @@ input[type='text'] {
   --content-background-color: transparent;
 
   > label {
+    float: left;
     display: block;
     width: 100%;
     height: var(--label-height);
@@ -316,26 +309,76 @@ input[type='text'] {
 
   /* content */
   > :nth-child(2) {
+    float: left;
     width: 100%;
     background-color: var(--content-background-color);
   }
 }
 
 #label-control,
-#secret-control {
+#secret-control,
+#file-control,
+#data-control,
+#format-control,
+#secrets-control {
   --label-height: 30px;
 
   width: 100%;
 }
 
 #secret-input,
-#label-input {
+#label-input,
+#file-input,
+#format-select,
+#secrets-select {
+  --border: 1px solid #767676;
   height: var(--label-height);
   font-size: 16px;
 }
 
-#add-key-modal-btn-add {
-  width: 30px;
+#data-input {
+  font-size: 16px;
+  resize: none;
+}
+
+#secrets-select {
   height: 100%;
+}
+
+#add-key-modal-btn-add {
   float: right;
+  width: 50px;
+  height: 100%;
+}
+
+#btn-import,
+#btn-export,
+#btn-clear {
+  --background-color: #616161;
+  --hover-background-color: #757575;
+  --active-background-color: #212121;
+
+  display: block;
+  width: 100%;
+  height: 30px;
+  font-size: 16px;
+}
+
+#btn-import,
+#btn-export {
+  margin-bottom: 5px;
+}
+
+#import-modal .footer > button,
+#export-modal .footer > button {
+  float: right;
+  width: 75px;
+  height: 100%;
+}
+
+#import-modal-btn-from-clipboard,
+#export-modal-btn-select-all {
+  float: left;
+  width: 100px;
+  height: 20px;
 }
