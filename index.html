@@ -21,36 +21,21 @@
 
   <body>
     <div id="toolbar">
-      <button id="add-secret" data-tooltip="Add Secret">
+      <button id="add-secret">
         <span class="material-symbols-outlined">add</span>
       </button>
 
-      <button class="right" data-tooltip="(Coming Soon) Settings" disabled>
+      <button id="settings" class="right">
         <span class="material-symbols-outlined">settings</span>
       </button>
 
       <span class="sep right"></span>
 
-      <button class="right" data-tooltip="(Coming Soon) Import Data" disabled>
-        <span class="material-symbols-outlined">upload</span>
-      </button>
-
-      <button class="right" data-tooltip="(Coming Soon) Export Data" disabled>
-        <span class="material-symbols-outlined">download</span>
-      </button>
-
-      <span class="sep right"></span>
-
-      <button id="btn-list" class="right selected" data-tooltip="List View">
+      <button id="btn-list" class="right selected">
         <span class="material-symbols-outlined">view_list</span>
       </button>
 
-      <button
-        id="btn-grid"
-        class="right"
-        data-tooltip="(Coming Soon) Grid View"
-        disabled
-      >
+      <button id="btn-grid" class="right" disabled>
         <span class="material-symbols-outlined">grid_view</span>
       </button>
     </div>
@@ -65,35 +50,119 @@
       <div id="view-grid" class="grid"></div>
     </div>
 
-    <div id="add-secret-modal" class="modal">
+    <div id="add-secret-modal" class="modal" tabindex="0">
       <div class="header">
         <p class="title">Add Secret</p>
 
-        <button id="add-key-modal-btn-close" class="close" data-tooltip="Close">
+        <button class="close">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
 
       <div class="content">
         <div id="label-control" class="control">
-          <label for="label-input" data-tooltip="A label for the secret"
-            >Label</label
-          >
+          <label for="label-input">Label</label>
 
           <input type="text" id="label-input" />
         </div>
 
         <div id="secret-control" class="control">
-          <label for="secret-input" data-tooltip="The secret itself"
-            >Secret</label
-          >
+          <label for="secret-input">Secret</label>
 
           <input type="text" id="secret-input" />
         </div>
       </div>
 
       <div class="footer">
-        <button id="add-key-modal-btn-add" data-tooltip="Add">Add</button>
+        <button id="add-key-modal-btn-add">Add</button>
+      </div>
+    </div>
+
+    <div id="settings-modal" class="modal" tabindex="0">
+      <div class="header">
+        <p class="title">Settings</p>
+
+        <button class="close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="content">
+        <button id="btn-import">Import Secrets</button>
+        <button id="btn-export">Export Secrets</button>
+        <button id="btn-clear">Clear Secrets</button>
+      </div>
+    </div>
+
+    <div id="import-modal" class="modal" tabindex="0">
+      <div class="header">
+        <p class="title">Import Secrets</p>
+
+        <button class="close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="content">
+        <div id="file-control" class="control">
+          <label for="file-input">File</label>
+
+          <input type="file" id="file-input" />
+        </div>
+
+        <span class="hsep"></span>
+
+        <div id="data-control" class="control">
+          <label for="data-input">Data (JSON; base64)</label>
+
+          <textarea id="data-input" rows="5"></textarea>
+          <button id="import-modal-btn-from-clipboard">From Clipboard</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button id="import-modal-btn-merge">Merge</button>
+        <span class="sep right"></span>
+        <button id="import-modal-btn-overwrite">Overwrite</button>
+      </div>
+    </div>
+
+    <div id="export-modal" class="modal" tabindex="0">
+      <div class="header">
+        <p class="title">Export Secrets</p>
+
+        <button class="close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="content">
+        <div id="format-control" class="control">
+          <label for="format-select">Format</label>
+
+          <select id="format-select">
+            <option value="json">JSON</option>
+            <option value="json-pretty">JSON (pretty)</option>
+            <option value="json-b64">JSON (base64)</option>
+            <option value="json-pretty-b64">JSON (pretty, base64)</option>
+            <option value="json-encrypted-b64" selected>
+              JSON (encrypted, base64)
+            </option>
+          </select>
+        </div>
+
+        <div id="secrets-control" class="control">
+          <label for="secrets-select">Secrets</label>
+
+          <select id="secrets-select" size="10" multiple></select>
+          <button id="export-modal-btn-select-all">Select All</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button id="export-modal-btn-export">Export</button>
+        <span class="sep right"></span>
+        <button id="export-modal-btn-copy">Copy</button>
       </div>
     </div>
 
